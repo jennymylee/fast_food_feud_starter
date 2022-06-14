@@ -33,7 +33,7 @@ export function App() {
   let currentMenuItems = data.filter((d) => {
     return d.food_category == category && d.restaurant == restaurant;
   });
-  console.log(data);
+
   return (
     <main className="App">
       {/* CATEGORIES COLUMN */}
@@ -84,7 +84,10 @@ export function App() {
               <Chip
                 key={i}
                 label={currentMenuItem.item_name}
-                isActive={selectedMenuItem == currentMenuItem}
+                isActive={
+                  selectedMenuItem &&
+                  selectedMenuItem.item_name === currentMenuItem.item_name
+                }
                 onClick={() => setSelectedMenuItem(currentMenuItem)}
               />
             ))}
@@ -92,7 +95,6 @@ export function App() {
 
           {/* NUTRITION FACTS */}
           <div className="NutritionFacts nutrition-facts">
-            {/* YOUR CODE HERE */}
             {selectedMenuItem ? (
               <NutritionalLabel selectedMenuItem={selectedMenuItem} />
             ) : null}

@@ -3,7 +3,6 @@ import { nutritionFacts } from "../../constants";
 import "./NutritionalLabel.css";
 
 export function NutritionalLabel({ selectedMenuItem }) {
-  console.log(selectedMenuItem);
   return (
     <div className="nutritional-label">
       <h3 className="title">Nutrition Facts</h3>
@@ -25,7 +24,6 @@ export function NutritionalLabel({ selectedMenuItem }) {
 }
 
 export function NutritionalLabelFact(props) {
-  console.log(props.item);
   return (
     <li className="nutrition-fact">
       <span className="fact-label">{props.label}</span>{" "}
