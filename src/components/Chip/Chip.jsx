@@ -6,7 +6,18 @@ export function Chip({ label = "", isActive = false, onClick = () => {} }) {
   return (
     <button className={buttonClassName} onClick={onClick}>
       <p className="label">{label}</p>
-      <span className="close" role="button">{`X`}</span>
+      <span
+        className="close"
+        role="button"
+        onClick={() => {
+          document
+            .getElementsByClassName(buttonClassName)[0]
+            .classList.add("close");
+          document
+            .getElementsByClassName(buttonClassName)[0]
+            .classList.remove("active");
+        }}
+      >{`X`}</span>
     </button>
   );
 }

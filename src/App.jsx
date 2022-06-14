@@ -47,7 +47,7 @@ export function App() {
       instruction = appInfo.instructions.noSelectedItem;
     }
     console.log("useEffect");
-  }, [category, restaurant]);
+  }, [category, restaurant, selectedMenuItem]);
 
   const renderInstructions = () => {
     if (category && restaurant) {
