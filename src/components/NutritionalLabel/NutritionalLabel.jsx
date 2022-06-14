@@ -2,12 +2,12 @@ import * as React from "react";
 import { nutritionFacts } from "../../constants";
 import "./NutritionalLabel.css";
 
-export function NutritionalLabel({ selectedMenuItem }) {
+export function NutritionalLabel({ item }) {
   return (
     <div className="nutritional-label">
       <h3 className="title">Nutrition Facts</h3>
 
-      <h4 className="item-name">{selectedMenuItem?.item_name}</h4>
+      <h4 className="item-name">{item?.item_name}</h4>
 
       <ul className="fact-list">
         {nutritionFacts.map((fact) => (
@@ -15,7 +15,7 @@ export function NutritionalLabel({ selectedMenuItem }) {
             key={fact.id}
             label={fact.label}
             attribute={fact.attribute}
-            item={selectedMenuItem}
+            item={item}
           />
         ))}
       </ul>

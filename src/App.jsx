@@ -1,6 +1,6 @@
 import * as React from "react";
 // IMPORT ANY NEEDED COMPONENTS HERE
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createDataSet } from "./data/dataset";
 import "./App.css";
 import Header from "./components/Header/Header";
@@ -30,9 +30,36 @@ export function App() {
   const [restaurant, setRestaurant] = React.useState(null);
   const [selectedMenuItem, setSelectedMenuItem] = React.useState(null);
 
+  let instruction = appInfo.instructions.start;
+
   let currentMenuItems = data.filter((d) => {
     return d.food_category == category && d.restaurant == restaurant;
   });
+
+  useEffect(() => {
+    if (category && restaurant) {
+      instruction = appInfo.instructions.allSelected;
+    } else if (category) {
+      instruction = appInfo.instructions.onlyCategory;
+    } else if (restaurant) {
+      instruction = appInfo.instructions.onlyRestaurant;
+    } else {
+      instruction = appInfo.instructions.noSelectedItem;
+    }
+    console.log("useEffect");
+  }, [category, restaurant]);
+
+  const renderInstructions = () => {
+    if (category && restaurant) {
+      instruction = appInfo.instructions.allSelected;
+    } else if (category) {
+      instruction = appInfo.instructions.onlyCategory;
+    } else if (restaurant) {
+      instruction = appInfo.instructions.onlyRestaurant;
+    } else {
+      instruction = appInfo.instructions.noSelectedItem;
+    }
+  };
 
   return (
     <main className="App">
@@ -75,7 +102,7 @@ export function App() {
         </div>
 
         {/* INSTRUCTIONS GO HERE */}
-        <Instructions instructions={appInfo.instructions.start} />
+        <Instructions instructions={instruction} />
         {/* MENU DISPLAY */}
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
@@ -96,7 +123,7 @@ export function App() {
           {/* NUTRITION FACTS */}
           <div className="NutritionFacts nutrition-facts">
             {selectedMenuItem ? (
-              <NutritionalLabel selectedMenuItem={selectedMenuItem} />
+              <NutritionalLabel item={selectedMenuItem} />
             ) : null}
           </div>
         </div>
